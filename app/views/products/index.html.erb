@@ -1,37 +1,30 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Products</h1>
+<%=select_tag(:category, options_for_select(@categories))%>
+<div id= "products_list">
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Category</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @products.each do |product| %>
-      <tr>
-        <td><%= product.name %></td>
-        <td><%= product.price %></td>
-        <td><%= product.quantity %></td>
-        <td>
-          <%if product.category.present?%>
-          <%= product.category.name %>
-          <%end%>
-        </td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<!-- # this is coming from products list.html.erb its getting rendered -->
+<%= render "products_list" , products: @products%>
 
+<div>
 <br>
+<!--js ajax -->
+<script>
+$("#category").on("change", function(e){
+console.log($("#category").val());
+
+$.ajax({
+  url: "/products/filter_products",
+  dataType: "script",
+  method: "GET",
+  data: {
+    category_id: $("#category").val()
+  }
+})
+
+});
+</script>
 
 <%= link_to 'New Product', new_product_path %>
