@@ -1,17 +1,28 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Products</h1>
-<%=select_tag(:category, options_for_select(@categories))%>
-<div id= "products_list">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <h1>Products</h1>
+      <%=select_tag(:category, options_for_select(@categories), class: "form-control")%>
+    </div>
+  </div>
 
+  <hr>
 
-<!-- # this is coming from products list.html.erb its getting rendered -->
-<%= render "products_list" , products: @products%>
+  <div class="row"id= "products_list">
+    <!-- # this is coming from products list.html.erb its getting rendered -->
+    <div class="col-sm-12">
+    <%= render "products_list" , products: @products%>
+  </div>
+  </div>
+
 
 
 </div>
-<br>
+
 <!--js ajax -->
+
+</div>
 <script>
 $("#category").on("change", function(e){
 console.log($("#category").val());
@@ -27,5 +38,9 @@ $.ajax({
 
 });
 </script>
-
-<%= link_to 'New Product', new_product_path %>
+<div class="row">
+  <div class="col-sm-12">
+<%= link_to 'New Product', new_product_path,
+                          class: "btn btn-success" %>
+  </div>
+</div>
