@@ -16,12 +16,14 @@ class ProductsController < ApplicationController
   # GET /products/new
   def new
     @product = Product.new
+    @action = "Create"
     #I added this below
     @categories = Category.to_array_for_select_field
   end
 
   # GET /products/1/edit
   def edit
+        @action = "Update"
   end
 
   # POST /products
